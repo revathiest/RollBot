@@ -61,7 +61,7 @@ function roll(count, min, max){
     result = Math.floor(Math.random()*max+min);
   } else {
     for(i = 0; i < count; i++){
-      result = 0;
+      result = result + Math.floor(Math.random()*max+min);
     }
   }
   return result;
