@@ -42,9 +42,6 @@ function roll(count, min, max){
 
 function postMessage(message, arg) {
   var botResponse, options, body, botReq;
-
-  botResponse = cool();
-
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
