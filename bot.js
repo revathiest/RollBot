@@ -40,7 +40,7 @@ function roll(count, min, max){
   return result;
 }
 
-function postMessage(message, arg) {
+function postMessage(message, name, id) {
   var botResponse, options, body, botReq;
   options = {
     hostname: 'api.groupme.com',
@@ -55,9 +55,9 @@ if(arg){
     "attachments": [
     {
       "type": "mentions",
-      "user_ids": [arg],
+      "user_ids": [id],
       "loci": [
-        [0,command.name.length + 1]
+        [0,name.length + 1]
       ]
 
     }
