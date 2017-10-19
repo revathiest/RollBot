@@ -1,16 +1,18 @@
 var HTTPS = require('https');
-var cool = require('cool-ascii-faces');
 
-var botID = process.env.BOT_ID;
+var botID = process.env.BOT_ID,
+botCommand =  /^\/roll/;
+//roll
+//d4, d6, d8, d10, d20
+//min max
+// @User rolled: val
+
 
 function respond() {
-  var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/;
-
-  if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage();
-    this.res.end();
+  var request = JSON.parse(this.req.chunks[0]);
+  console.log("targetName: " + userTarget + ", activationFlag: " + activationFlag + ", request.name: " + request.name + ", Match: " + (request.name == userTarget));
+  if(request.text && botCommand.test(request.text)){
+      commandHandler(this, request);
   } else {
     console.log("don't care");
     this.res.writeHead(200);
@@ -18,7 +20,28 @@ function respond() {
   }
 }
 
-function postMessage() {
+function commandHandler(relThis, command){
+  var rollCount = 1 //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
+      rollMin = 1,
+      rollMax = 100;
+  relThis.res.writeHead(200);
+  postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMx)), command.name, command.user_id);
+  relThis.res.end();
+}
+
+function roll(count, min, max){
+  var result = 0;
+  if(count === 1){
+    result = Math.floor(Math.random()*max+min);
+  } else {
+    for(i = 0; i < count; i++){
+      result = 0;
+    }
+  }
+  return result;
+}
+
+function postMessage(message, arg) {
   var botResponse, options, body, botReq;
 
   botResponse = cool();
@@ -29,12 +52,23 @@ function postMessage() {
     method: 'POST'
   };
 
+if(arg){
   body = {
     "bot_id" : botID,
-    "text" : botResponse
-  };
+    "text" : message,
+    "attachments": [
+    {
+      "type": "mentions",
+      "user_ids": [arg],
+      "loci": [
+        [0,command.name.length + 1]
+      ]
 
-  console.log('sending ' + botResponse + ' to ' + botID);
+    }
+    ]
+  };
+}
+
 
   botReq = HTTPS.request(options, function(res) {
       if(res.statusCode == 202) {
