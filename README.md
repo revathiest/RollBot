@@ -1,11 +1,12 @@
-# Sample GroupMe NodeJS Callback Bot
+# Roll Bot for GroupMe
 
 ## Introduction
 
-This project shows the capability of a bot to react to messages sent within a group.
+This bot is used for standard
 
 ## Contents
-
+  * [Bot Commands](#commands)
+    * How to Roll
   * [Quickly get our sample bot up and running in your groups](#deploy)
     * Deploy the code to heroku
     * Create a bot
@@ -19,6 +20,20 @@ This project shows the capability of a bot to react to messages sent within a gr
   * GroupMe account
   * Heroku account
   * [Heroku Toolbelt](https://toolbelt.heroku.com/)
+
+# Bot Commands<a name="commands"></a>
+/roll (range 1 - 100):
+    
+    /roll
+
+
+/roll xdy (rolls y sided dice x times):
+
+    /roll 1d20
+
+/roll min max (range min - max |):
+
+    /roll 5 500
 
 # Get your bot up and running<a name="deploy"></a>
 
