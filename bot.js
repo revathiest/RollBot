@@ -20,9 +20,35 @@ function respond() {
 }
 
 function commandHandler(relThis, command){
-  var rollCount = 1 //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
-      rollMin = 1,
+  var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
+      rollMin = 0,
+      rollMax = 0;
+/*
+Default vals
+      rollCount = 1; //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
+      rollMin = 1;
       rollMax = 100;
+*/
+if(!command.text.split(' ')[1]){
+//Pure Roll
+  rollCount = 1;
+  rollMin = 1;
+  rollMax = 100;
+} else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
+//dice setup 
+  rollCount = command.text.split(' ')[1].split('d')[0];
+  rollMin = 1;
+  rollMax = command.text.split(' ')[1].split('d')[1];
+} else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
+//min max
+  rollCount = 1;
+  rollMin = command.text.split(' ')[1];
+  rollMax = command.text.split(' ')[2];
+} else {
+  rollCount = 1;
+  rollMin = 0;
+  rollMax = 0;
+}
   relThis.res.writeHead(200);
   postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
   relThis.res.end();
