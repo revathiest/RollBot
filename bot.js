@@ -10,7 +10,6 @@ botCommand =  /^\/roll/;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
-  console.log("targetName: " + userTarget + ", activationFlag: " + activationFlag + ", request.name: " + request.name + ", Match: " + (request.name == userTarget));
   if(request.text && botCommand.test(request.text)){
       commandHandler(this, request);
   } else {
