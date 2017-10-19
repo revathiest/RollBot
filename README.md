@@ -31,7 +31,7 @@ This bot is used for standard
 
     /roll 1d20
 
-/roll min max (range min - max |):
+/roll min max (range min - max):
 
     /roll 5 500
 
