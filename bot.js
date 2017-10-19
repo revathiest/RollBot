@@ -36,14 +36,14 @@ if(!command.text.split(' ')[1]){
   rollMax = 100;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
-  rollCount = command.text.split(' ')[1].split('d')[0];
+  rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   rollMin = 1;
-  rollMax = command.text.split(' ')[1].split('d')[1];
+  rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
 } else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
 //min max
   rollCount = 1;
-  rollMin = command.text.split(' ')[1];
-  rollMax = command.text.split(' ')[2];
+  rollMin = parseInt(command.text.split(' ')[1]);
+  rollMax = parseInt(command.text.split(' ')[2]);
 } else {
   rollCount = 1;
   rollMin = 0;
