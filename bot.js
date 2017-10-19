@@ -24,7 +24,7 @@ function commandHandler(relThis, command){
       rollMin = 1,
       rollMax = 100;
   relThis.res.writeHead(200);
-  postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax)), command.name, command.user_id);
+  postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
   relThis.res.end();
 }
 
