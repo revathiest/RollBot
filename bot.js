@@ -48,7 +48,6 @@ function postMessage(message, name, id) {
     method: 'POST'
   };
 
-if(arg){
   body = {
     "bot_id" : botID,
     "text" : message,
@@ -63,8 +62,6 @@ if(arg){
     }
     ]
   };
-}
-
 
   botReq = HTTPS.request(options, function(res) {
       if(res.statusCode == 202) {
