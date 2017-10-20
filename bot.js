@@ -58,10 +58,10 @@ if(!command.text.split(' ')[1]){
 function roll(count, min, max){
   var result = 0;
   if(count === 1){
-    result = min+Math.floor(Math.random()*(max-min));
+    result = min + Math.floor(Math.random()*(max-min+1));
   } else {
     for(i = 0; i < count; i++){
-      result = result + min + Math.floor(Math.random()*(max-min));
+      result = result + (min + Math.floor(Math.random()*(max-min+1)));
     }
   }
   return result;
