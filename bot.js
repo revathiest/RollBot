@@ -55,7 +55,7 @@ if(!command.text.split(' ')[1]){
       for(i = 0; i < rollCount; i++){
         roll(1, rollMin, rollMax) + " "
       }
-      + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+      + " [" + rollCount + "-" + rollMax + "]"), command.name, command.user_id);
 
   relThis.res.end();
 }
