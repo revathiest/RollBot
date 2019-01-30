@@ -23,6 +23,7 @@ function commandHandler(relThis, command){
   var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
       rollMin = 0,
       rollMax = 0;
+      rollSum = 0;
   var rollString = "";
 /*
 Default vals
@@ -59,9 +60,11 @@ if(!command.text.split(' ')[1]){
   //This is the junk I've written
   for(i = 0; i < rollCount; i++){
     if (i < 1){
-      rollString = rollString + " " + roll(1, rollMin, rollMax) 
+      var rollTmp = roll(1, rollMin, rollMax) 
+      rollSum += rollTmp
+      rollString = rollString + " " + rollTmp 
     } else {
-      rollString = rollString + ", " + roll(1, rollMin, rollMax) 
+      rollString = rollString + ", " + rollTmp 
     }
   } 
   postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollCount + "d" + rollMax + "]"), command.name, command.user_id);
