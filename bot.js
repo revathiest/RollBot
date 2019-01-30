@@ -58,7 +58,7 @@ if(!command.text.split(' ')[1]){
 
   //This is the junk I've written
   for(i = 0; i < rollCount; i++){
-    if (i == 1){
+    if (i < 1){
       rollString = rollString + " " + roll(1, rollMin, rollMax) 
     } else {
       rollString = rollString + ", " + roll(1, rollMin, rollMax) 
