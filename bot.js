@@ -59,15 +59,15 @@ if(!command.text.split(' ')[1]){
 
   //This is the junk I've written
   for(i = 0; i < rollCount; i++){
+  var rollTmp = roll(1, rollMin, rollMax) 
+  rollSum += rollTmp
     if (i < 1){
-      var rollTmp = roll(1, rollMin, rollMax) 
-      rollSum += rollTmp
       rollString = rollString + " " + rollTmp 
     } else {
       rollString = rollString + ", " + rollTmp 
     }
   } 
-  postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollCount + "d" + rollMax + "]"), command.name, command.user_id);
+  postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
   
   relThis.res.end();
 }
