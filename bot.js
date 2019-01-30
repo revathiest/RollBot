@@ -23,6 +23,7 @@ function commandHandler(relThis, command){
   var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
       rollMin = 0,
       rollMax = 0;
+  var rollString = "";
 /*
 Default vals
       rollCount = 1; //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
@@ -51,7 +52,14 @@ if(!command.text.split(' ')[1]){
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-  postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+  
+  // This is the line that definitely works
+  //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+
+  //This is the junk I've written
+  for(i = 0; i < rollCount; i++){ rollString = rollString + " " + roll(1, rollMin, rollMax) } 
+  postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+  
   relThis.res.end();
 }
 
