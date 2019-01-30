@@ -57,8 +57,14 @@ if(!command.text.split(' ')[1]){
   //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
 
   //This is the junk I've written
-  for(i = 0; i < rollCount; i++){ rollString = rollString + " " + roll(1, rollMin, rollMax) } 
-  postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+  for(i = 0; i < rollCount; i++){
+    if (i == 1){
+      rollString = rollString + " " + roll(1, rollMin, rollMax) 
+    } else {
+      rollString = rollString + ", " + roll(1, rollMin, rollMax) 
+    }
+  } 
+  postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollCount + "d" + rollMax + "]"), command.name, command.user_id);
   
   relThis.res.end();
 }
