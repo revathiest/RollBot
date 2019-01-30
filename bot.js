@@ -51,11 +51,7 @@ if(!command.text.split(' ')[1]){
 }
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
-    postMessage(("@" + command.name + " rolled: " + 
-      for(i = 0; i < rollCount; i++){
-        roll(1, rollMin, rollMax) + " "
-      }
-      + " [" + rollCount + "-" + rollMax + "]"), command.name, command.user_id);
+  postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " " + " [" + rollCount + "-" + rollMax + "]"), command.name, command.user_id);
 
   relThis.res.end();
 }
