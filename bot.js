@@ -13,7 +13,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && botCommandRoll.test(request.text)){
       commandHandler(this, request);
-  } else if( request.text && botCommandSing.test(request.text)){
+  } else if(request.text && botCommandSing.test(request.text)){
       postMessage("Looks like it works.");
   } else {
     console.log("don't care");
@@ -57,7 +57,7 @@ if(!command.text.split(' ')[1]){
   console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
   relThis.res.writeHead(200);
   
-  // This is the line that definitely works
+  // Original code
   //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
 
   //This is the junk I've written
