@@ -70,7 +70,7 @@ if(!command.text.split(' ')[1]){
       rollString = rollString + ", " + rollTmp 
     }
   } 
-  postMessage(("@" + command.name + " rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+  postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
   
   relThis.res.end();
 }
@@ -97,7 +97,7 @@ function postMessage(message, name, id) {
 
   body = {
     "bot_id" : botID,
-    "text" : message,
+    "text" : "@" + name + " " + message,
     "attachments": [
     {
       "type": "mentions",
