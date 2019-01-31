@@ -14,7 +14,7 @@ function respond() {
   if(request.text && botCommandRoll.test(request.text)){
       commandHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
-      postMessage("Looks like it works.", command.name, command.user_id);
+      postMessage("Looks like it works.", request.name, request.user_id);
   } else {
     console.log("don't care");
     this.res.writeHead(200);
