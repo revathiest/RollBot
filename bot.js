@@ -73,7 +73,7 @@ function commandHandler(relThis, command){
 	  case (rollTest < 80):
 	    //nothing in here right now.  This is just a normal roll
 	    break;
-	  case (rollTest < 80):
+	  case (rollTest <= 100):
 	    postMessage(("Nice roll!"), command.name, command.user_id);
 		break;
 	  default:
