@@ -3,16 +3,11 @@ var HTTPS = require('https');
 var botID = process.env.BOT_ID,
 botCommandRoll =  /^\/roll/;
 botCommandSing =  /^\/sing/;
-//roll
-//d4, d6, d8, d10, d20
-//min max
-// @User rolled: val
-
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && botCommandRoll.test(request.text)){
-      commandHandler(this, request);
+    commandHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
     postMessage("Looks like it works.", request.name, request.user_id);
   } else {
@@ -23,36 +18,31 @@ function respond() {
 }
 
 function commandHandler(relThis, command){
-  var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
-  rollMax = 0;
-  rollSum = 0;
-  var rollString = "";
+  var rollCount = 0,
+  rollMax = 0,
+  rollSum = 0,
+  rollString = "";
 
   if(!command.text.split(' ')[1]){
-      //Need more info
-      postMessage("You have to tell me what to roll.", command.name, command.user_id);
-      relThis.res.writeHead(200);
-      relThis.res.end();
-      } else if(command.text.split(' ')[2]){
-      postMessage("That doesnt make sense.", command.name, command.user_id);
-      relThis.res.writeHead(200);
-      relThis.res.end();
-    } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
-      //dice setup 
-      rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
-      rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-    } else {
-      rollCount = 0;
-      rollMax = 0;
-    }
-    console.log('Count: ' + rollCount + ", Max: " + rollMax);
+    postMessage("You have to tell me what to roll.", command.name, command.user_id);
     relThis.res.writeHead(200);
+    relThis.res.end();
+  } else if(command.text.split(' ')[2]){
+    postMessage("That doesnt make sense.", command.name, command.user_id);
+    relThis.res.writeHead(200);
+    relThis.res.end();
+  } else if(command.text.split(' ')[1] && command.text.split(' ')[1].match(/(\d*[0-9]d[0-9]\d*)/){
+    //dice setup 
+    rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
+    rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+  } else {
+    rollCount = 0;
+    rollMax = 0;
+  }
+  console.log('Count: ' + rollCount + ", Max: " + rollMax);
+  relThis.res.writeHead(200);
 
-    // Original code
-    //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
-
-    //This is the junk I've written
-    for(i = 0; i < rollCount; i++){
+  for(i = 0; i < rollCount; i++){
     var rollTmp = roll(rollMax) 
     rollSum += rollTmp
     if (i < 1){
@@ -67,8 +57,8 @@ function commandHandler(relThis, command){
   }
 }
 
-function roll(max){
-  var result = Math.ceil(Math.random()*(max));
+function roll(sides){
+  var result = Math.ceil(Math.random()*(sides));
   return result;
 }
 
@@ -84,23 +74,20 @@ function postMessage(message, name, id) {
     "bot_id" : botID,
     "text" : "@" + name + " " + message,
     "attachments": [
-    {
-      "type": "mentions",
-      "user_ids": [id],
-      "loci": [
-        [0,name.length + 1]
-      ]
-
-    }
+      {
+        "type": "mentions",
+        "user_ids": [id],
+        "loci": [ [0,name.length + 1] ]
+      }
     ]
   };
 
   botReq = HTTPS.request(options, function(res) {
-      if(res.statusCode == 202) {
-        //neat
-      } else {
-        console.log('rejecting bad status code ' + res.statusCode);
-      }
+    if(res.statusCode == 202) {
+      //neat
+    } else {
+      console.log('rejecting bad status code ' + res.statusCode);
+    }
   });
 
   botReq.on('error', function(err) {
