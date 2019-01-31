@@ -35,8 +35,7 @@ Default vals
 */
 if(!command.text.split(' ')[1]){
 //Pure Roll
-  rollCount = 1;
-  rollMax = 100;
+  postMessage(("You have to tell me what to roll.", command.name, command.user_id);
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
