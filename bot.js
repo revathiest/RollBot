@@ -42,6 +42,9 @@ if(!command.text.split(' ')[1]){
   this.res.writeHead(200);
   this.res.end();
 } else {
+  rollCount = 1;
+  rollMaxc = 0;
+}
   console.log('Count: ' + rollCount + ", Max: " + rollMax);
   relThis.res.writeHead(200);
   
