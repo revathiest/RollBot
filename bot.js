@@ -3,10 +3,6 @@ var HTTPS = require('https');
 var botID = process.env.BOT_ID,
 botCommandRoll =  /^\/roll/;
 botCommandSing =  /^\/sing/;
-//roll
-//d4, d6, d8, d10, d20
-//min max
-// @User rolled: val
 
 
 function respond() {
@@ -23,7 +19,7 @@ function respond() {
 }
 
 function commandHandler(relThis, command){
-  var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
+  var rollCount = 0,
   rollMax = 0;
   rollSum = 0;
   var rollString = "";
@@ -48,10 +44,6 @@ function commandHandler(relThis, command){
     console.log('Count: ' + rollCount + ", Max: " + rollMax);
     relThis.res.writeHead(200);
 
-    // Original code
-    //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
-
-    //This is the junk I've written
     for(i = 0; i < rollCount; i++){
     var rollTmp = roll(rollMax) 
     rollSum += rollTmp
@@ -61,6 +53,8 @@ function commandHandler(relThis, command){
       rollString = rollString + ", " + rollTmp 
     }
   }
+
+  //Adding a test comment
   if(!rollCount == 0) {
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
     switch(Math.floor(rollSum / (rollCount * rollMax) * 100)){
