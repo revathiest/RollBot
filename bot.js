@@ -58,17 +58,22 @@ function commandHandler(relThis, command){
   if(!rollCount == 0 && !rollMax == 0) {
     var rollTest =  Math.ceil(rollSum / (rollCount * rollMax) * 100);
 	
+    postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+	
 	switch (true){
-	  case (rollTest < 16):
+	  case (rollTest < 20):
 	    postMessage(("That was an ugly roll..."), command.name, command.user_id);
-	  break;
-	  case (rollTest > 84):
+	    break;
+	  case (rollTest < 80):
+	    break;
+	  case (rollTest < 99):
 	    postMessage(("Nice roll!"), command.name, command.user_id);
-	  break;
+	    break;
+	  case (rollTest == 100):
+	    postMessage(("Critical Roll!"), command.name, command.user_id);
+		break;
 	  default:
 	}
-	
-    postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
     relThis.res.end();
   }
 }
