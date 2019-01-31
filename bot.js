@@ -48,17 +48,16 @@ function commandHandler(relThis, command){
 
   for(i = 0; i < rollCount; i++){
     var rollTmp = roll(rollMax) 
-    rollSum += rollTmp
+    rollSum += rollTmp;
     if (i < 1){
-      rollString = rollString + " " + rollTmp 
+      rollString = rollString + " " + rollTmp ;
     } else {
-      rollString = rollString + ", " + rollTmp 
+      rollString = rollString + ", " + rollTmp ;
     }
   }
   if(!rollCount == 0 && !rollMax == 0) {
-    var rollTest;
-	rollTest = rollSum / (rollCount * RollMax) * 100;
-	/*
+    var rollTest = (rollSum / (rollCount * rollMax) * 100);
+	
 	switch (rollTest){
 	  case 1-10:
 	    postMessage(("That was an ugly roll..."), command.name, command.user_id);
@@ -68,7 +67,7 @@ function commandHandler(relThis, command){
 	  break;
 	  default:
 	}
-	*/
+	
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
     relThis.res.end();
   }
