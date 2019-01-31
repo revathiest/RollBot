@@ -59,6 +59,7 @@ function commandHandler(relThis, command){
     var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 	
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+	postMessage((rollTest), command.name, command.user_id);
 	
 	switch (true){
 	  case (rollTest <= 1):
