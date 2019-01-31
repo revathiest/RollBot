@@ -8,7 +8,7 @@ botCommandSing =  /^\/sing/;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && botCommandRoll.test(request.text)){
-      commandHandler(this, request);
+	commandHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
     postMessage("Looks like it works.", request.name, request.user_id);
   } else {
@@ -22,6 +22,7 @@ function commandHandler(relThis, command){
   var rollCount = 0,
   rollMax = 0;
   rollSum = 0;
+  rollTmp
   var rollString = "";
 
   if(!command.text.split(' ')[1]){
@@ -29,28 +30,28 @@ function commandHandler(relThis, command){
       postMessage("You have to tell me what to roll.", command.name, command.user_id);
       relThis.res.writeHead(200);
       relThis.res.end();
-      } else if(command.text.split(' ')[2]){
+  } else if(command.text.split(' ')[2]){
       postMessage("That doesnt make sense.", command.name, command.user_id);
       relThis.res.writeHead(200);
       relThis.res.end();
-    } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
+  } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
       //dice setup 
       rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
       rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-    } else {
+  } else {
       rollCount = 0;
       rollMax = 0;
-    }
+  }
     console.log('Count: ' + rollCount + ", Max: " + rollMax);
     relThis.res.writeHead(200);
 
     for(i = 0; i < rollCount; i++){
-    var rollTmp = roll(rollMax) 
-    rollSum += rollTmp
+	  rollTmp = roll(rollMax),
+      rollSum += rollTmp;
     if (i < 1){
-      rollString = rollString + " " + rollTmp 
+		rollString = rollString + " " + rollTmp;
     } else {
-      rollString = rollString + ", " + rollTmp 
+      rollString = rollString + ", " + rollTmp;
     }
   }
 
