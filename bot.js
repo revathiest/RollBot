@@ -17,6 +17,10 @@ function respond() {
   }
 }
 
+/* 
+I might want to change this at some point to be able to handle
+more types of commands.
+*/
 function commandHandler(relThis, command){
   var rollCount = 0,
   rollMax = 0,
@@ -44,15 +48,36 @@ function commandHandler(relThis, command){
 
   for(i = 0; i < rollCount; i++){
     var rollTmp = roll(rollMax) 
-    rollSum += rollTmp
+    rollSum += rollTmp;
     if (i < 1){
-      rollString = rollString + " " + rollTmp 
+      rollString = rollString + " " + rollTmp ;
     } else {
-      rollString = rollString + ", " + rollTmp 
+      rollString = rollString + ", " + rollTmp ;
     }
   }
-  if(!rollCount == 0) {
+  if(!rollCount == 0 && !rollMax == 0) {
+    var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
+	
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+	postMessage((rollTest), command.name, command.user_id);
+	
+	switch (true){
+	  case (rollSum == rollCount):
+	    postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
+		break;
+	  case (rollTest < 20):
+	    postMessage(("That was an ugly roll..."), command.name, command.user_id);
+	    break;
+	  case (rollTest < 80):
+	    break;
+	  case (rollTest < 99):
+	    postMessage(("Nice roll!"), command.name, command.user_id);
+	    break;
+	  case (rollTest == 100):
+	    postMessage(("Critical Roll!"), command.name, command.user_id);
+		break;
+	  default:
+	}
     relThis.res.end();
   }
 }
