@@ -58,7 +58,7 @@ function commandHandler(relThis, command){
   if(!rollCount == 0 && !rollMax == 0) {
     var rollTest = rollSum / (rollCount * RollMax) * 100;
 
-	switch rollTest{
+	switch (rollTest){
 	  case 1-10:
 	    postMessage(("That was an ugly roll..."), command.name, command.user_id);
 	  break;
