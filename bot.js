@@ -56,7 +56,7 @@ function commandHandler(relThis, command){
     }
   }
   if(!rollCount == 0 && !rollMax == 0) {
-    var rollTest = (rollSum / (rollCount * rollMax) * 100);
+    var rollTest = 5 // (rollSum / (rollCount * rollMax) * 100);
 	
 	switch (rollTest){
 	  case 1-10:
