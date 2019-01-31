@@ -24,7 +24,6 @@ function respond() {
 
 function commandHandler(relThis, command){
   var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
-      rollMin = 0,
       rollMax = 0;
       rollSum = 0;
   var rollString = "";
@@ -37,24 +36,16 @@ Default vals
 if(!command.text.split(' ')[1]){
 //Pure Roll
   rollCount = 1;
-  rollMin = 1;
   rollMax = 100;
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
-  rollMin = 1;
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-} else if(command.text.split(' ')[1] && command.text.split(' ')[2]){
-//min max
-  rollCount = 1;
-  rollMin = parseInt(command.text.split(' ')[1]);
-  rollMax = parseInt(command.text.split(' ')[2]);
 } else {
   rollCount = 1;
-  rollMin = 0;
   rollMax = 0;
 }
-  console.log('Count: ' + rollCount + ", Min: " + rollMin + ", Max: " + rollMax);
+  console.log('Count: ' + rollCount + ", Max: " + rollMax);
   relThis.res.writeHead(200);
   
   // Original code
