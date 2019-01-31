@@ -63,6 +63,15 @@ function commandHandler(relThis, command){
   }
   if(!rollCount == 0) {
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+    switch(Math.floor(rollSum / (rollCount * rollMax) * 100)){
+      case 1-5:
+        postMessage(("Oooh... tough break."), command.name, command.user_id);
+        break;
+      case 95-99:
+        postMessage(("Nice roll!"), command.name, command.user_id);
+        break;
+      default:
+    }
     relThis.res.end();
   }
 }
