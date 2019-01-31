@@ -31,12 +31,12 @@ function commandHandler(relThis, command){
 if(!command.text.split(' ')[1]){
 //Need more info
   postMessage("You have to tell me what to roll.", command.name, command.user_id);
-  this.res.writeHead(200);
-  this.res.end();
+//  this.res.writeHead(200);
+//  this.res.end();
 } else if(command.text.split(' ')[2]){
   postMessage("That doesnt make sense.", command.name, command.user_id);
-  this.res.writeHead(200);
-  this.res.end();
+//  this.res.writeHead(200);
+//  this.res.end();
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
