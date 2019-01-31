@@ -61,10 +61,10 @@ function commandHandler(relThis, command){
 			//debug message
 			postMessage(rollTest, command.name, command.user_id);
 		switch(rollTest){
-		case < 11:
+		case 1-10:
 			postMessage(("Oooh... tough break."), command.name, command.user_id);
 			break;
-		case > 89:
+		case 90-99:
 			postMessage(("Nice roll!"), command.name, command.user_id);
 			break;
 		default:
