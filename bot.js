@@ -20,10 +20,10 @@ function respond() {
 
 function commandHandler(relThis, command){
 	var rollCount = 0,
-	rollMax = 0;
-	rollSum = 0;
-	rollTmp
-	var rollString = "";
+	rollMax = 0,
+	rollSum = 0,
+	rollTmp,
+	rollString = "";
 
 	if(!command.text.split(' ')[1]){
 		//Need more info
