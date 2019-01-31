@@ -19,7 +19,7 @@ function respond() {
 
 /* 
 I might want to change this at some point to be able to handle
-more types of commands.
+more types of commands. 
 */
 function commandHandler(relThis, command){
   var rollCount = 0,
@@ -59,7 +59,6 @@ function commandHandler(relThis, command){
     var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 	
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
-	postMessage((rollTest), command.name, command.user_id);
 	
 	switch (true){
 	  case (rollSum == rollCount):
@@ -69,6 +68,7 @@ function commandHandler(relThis, command){
 	    postMessage(("That was an ugly roll..."), command.name, command.user_id);
 	    break;
 	  case (rollTest < 80):
+	    //nothing in here right now.  This is just a normal roll
 	    break;
 	  case (rollTest < 99):
 	    postMessage(("Nice roll!"), command.name, command.user_id);
