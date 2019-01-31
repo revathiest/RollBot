@@ -17,6 +17,10 @@ function respond() {
   }
 }
 
+/* 
+I might want to change this at some point to be able to handle
+more types of commands.
+*/
 function commandHandler(relThis, command){
   var rollCount = 0,
   rollMax = 0,
