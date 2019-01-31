@@ -27,12 +27,7 @@ function commandHandler(relThis, command){
       rollMax = 0;
       rollSum = 0;
   var rollString = "";
-/*
-Default vals
-      rollCount = 1; //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
-      rollMin = 1;
-      rollMax = 100;
-*/
+
 if(!command.text.split(' ')[1]){
 //Need more info
   postMessage("You have to tell me what to roll.", command.name, command.user_id);
@@ -46,7 +41,7 @@ if(!command.text.split(' ')[1]){
   postMessage("That doesnt make sense.", command.name, command.user_id);
   this.res.writeHead(200);
   this.res.end();
-}
+} else {
   console.log('Count: ' + rollCount + ", Max: " + rollMax);
   relThis.res.writeHead(200);
   
