@@ -68,7 +68,7 @@ function commandHandler(relThis, command){
 }
 
 function roll(max){
-  var result = 1 + Math.floor(Math.random()*(max));
+  var result = Math.ceil(Math.random()*(max));
   return result;
 }
 
