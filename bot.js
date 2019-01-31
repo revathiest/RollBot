@@ -55,7 +55,19 @@ function commandHandler(relThis, command){
       rollString = rollString + ", " + rollTmp 
     }
   }
-  if(!rollCount == 0) {
+  if(!rollCount == 0 && !rollMax == 0) {
+    var rollTest = rollSum / (rollCount * RollMax) * 100;
+
+	switch rollTest{
+	  case 1-10:
+	    postMessage(("That was an ugly roll..."), command.name, command.user_id);
+	  break;
+	  case 91-100:
+	    postMessage(("Nice roll!"), command.name, command.user_id);
+	  break;
+	  default:
+	}
+
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
     relThis.res.end();
   }
