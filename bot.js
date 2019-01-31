@@ -56,12 +56,12 @@ function commandHandler(relThis, command){
     }
   }
   if(!rollCount == 0 && !rollMax == 0) {
-    var rollTest =  Math.ceil(rollSum / (rollCount * rollMax) * 100);
+    var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 	
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
 	
 	switch (true){
-	  case (rollTest == 1):
+	  case (rollTest <= 1):
 	    postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
 		break;
 	  case (rollTest < 20):
