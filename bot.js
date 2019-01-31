@@ -57,7 +57,10 @@ function commandHandler(relThis, command){
 
 	if(!rollCount == 0) {
 		postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
-		switch(Math.floor(rollSum / (rollCount * rollMax) * 100)){
+		var rollTest = Math.floor(rollSum / (rollCount * rollMax) * 100);
+			//debug message
+			postMessage(rollTest, command.name, command.user_id);
+		switch(rollTest){
 		case 1-10:
 			postMessage(("Oooh... tough break."), command.name, command.user_id);
 			break;
