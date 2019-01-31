@@ -62,7 +62,7 @@ function commandHandler(relThis, command){
 	postMessage((rollTest), command.name, command.user_id);
 	
 	switch (true){
-	  case (rollTest <= 1):
+	  case (rollSum == rollCount):
 	    postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
 		break;
 	  case (rollTest < 20):
