@@ -60,11 +60,11 @@ function commandHandler(relThis, command){
 		var rollTest = Math.floor(rollSum / (rollCount * rollMax) * 100);
 			//debug message
 			postMessage(rollTest, command.name, command.user_id);
-		switch(rollTest){
-		case 1-10:
+		switch(true){
+		case (rollTest < 11):
 			postMessage(("Oooh... tough break."), command.name, command.user_id);
 			break;
-		case 90-99:
+		case (rollTest > 89):
 			postMessage(("Nice roll!"), command.name, command.user_id);
 			break;
 		default:
