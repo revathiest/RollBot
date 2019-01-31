@@ -61,7 +61,7 @@ function commandHandler(relThis, command){
     postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
 	
 	switch (true){
-	  case (rollSum == rollCount):
+	  case (rollSum == rollCount && rollCount == 1 && rollMax == 20):
 	    postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
 		break;
 	  case (rollTest < 20):
@@ -73,7 +73,7 @@ function commandHandler(relThis, command){
 	  case (rollTest < 99):
 	    postMessage(("Nice roll!"), command.name, command.user_id);
 	    break;
-	  case (rollTest == 100):
+	  case (rollTest == 100 && rollCount == 1 && rollMax == 20):
 	    postMessage(("Critical Roll!"), command.name, command.user_id);
 		break;
 	  default:
