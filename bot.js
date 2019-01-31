@@ -37,7 +37,7 @@ function commandHandler(relThis, command){
       postMessage("That doesnt make sense.", command.name, command.user_id);
       relThis.res.writeHead(200);
       relThis.res.end();
-    } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
+    } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
       //dice setup 
       rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
       rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
