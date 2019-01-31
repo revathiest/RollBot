@@ -24,46 +24,47 @@ function respond() {
 
 function commandHandler(relThis, command){
   var rollCount = 0, //command.text.split(' ')[1] ? command.text.split(' ')[1] : 1,
-      rollMax = 0;
-      rollSum = 0;
+  rollMax = 0;
+  rollSum = 0;
   var rollString = "";
 
-if(!command.text.split(' ')[1]){
-//Need more info
-  postMessage("You have to tell me what to roll.", command.name, command.user_id);
-  relThis.res.writeHead(200);
-  relThis.res.end();
-} else if(command.text.split(' ')[2]){
-  postMessage("That doesnt make sense.", command.name, command.user_id);
-  relThis.res.writeHead(200);
-  relThis.res.end();
-} else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
-//dice setup 
-  rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
-  rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-} else {
-  rollCount = 1;
-  rollMaxc = 0;
-}
-  console.log('Count: ' + rollCount + ", Max: " + rollMax);
-  relThis.res.writeHead(200);
-  
-  // Original code
-  //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+  if(!command.text.split(' ')[1]){
+      //Need more info
+      postMessage("You have to tell me what to roll.", command.name, command.user_id);
+      relThis.res.writeHead(200);
+      relThis.res.end();
+      } else if(command.text.split(' ')[2]){
+      postMessage("That doesnt make sense.", command.name, command.user_id);
+      relThis.res.writeHead(200);
+      relThis.res.end();
+    } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
+      //dice setup 
+      rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
+      rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+    } else {
+      rollCount = 0;
+      rollMax = 0;
+    }
+    console.log('Count: ' + rollCount + ", Max: " + rollMax);
+    relThis.res.writeHead(200);
 
-  //This is the junk I've written
-  for(i = 0; i < rollCount; i++){
-  var rollTmp = roll(rollMax) 
-  rollSum += rollTmp
+    // Original code
+    //postMessage(("@" + command.name + " rolled: " + roll(rollCount, rollMin, rollMax) + " [" + rollMin + "-" + rollMax + "]"), command.name, command.user_id);
+
+    //This is the junk I've written
+    for(i = 0; i < rollCount; i++){
+    var rollTmp = roll(rollMax) 
+    rollSum += rollTmp
     if (i < 1){
       rollString = rollString + " " + rollTmp 
     } else {
       rollString = rollString + ", " + rollTmp 
     }
-  } 
-  postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
-  
-  relThis.res.end();
+  }
+  if(!rollCount == 0) {
+    postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+    relThis.res.end();
+  }
 }
 
 function roll(max){
