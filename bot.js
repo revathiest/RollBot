@@ -14,7 +14,7 @@ function respond() {
   if(request.text && botCommandRoll.test(request.text)){
       commandHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
-      postMessage("Looks like it works.", request.name, request.user_id);
+    postMessage("Looks like it works.", request.name, request.user_id);
   } else {
     console.log("don't care");
     this.res.writeHead(200);
@@ -36,13 +36,16 @@ Default vals
 if(!command.text.split(' ')[1]){
 //Need more info
   postMessage("You have to tell me what to roll.", command.name, command.user_id);
+  this.res.writeHead(200);
+  this.res.end();
 } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]){
 //dice setup 
   rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
   rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-} else {
-  rollCount = 1;
-  rollMax = 0;
+} else if(command.text.split(' ')[2]){
+  postMessage("That doesnt make sense.", command.name, command.user_id);
+  this.res.writeHead(200);
+  this.res.end();
 }
   console.log('Count: ' + rollCount + ", Max: " + rollMax);
   relThis.res.writeHead(200);
