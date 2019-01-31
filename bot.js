@@ -62,7 +62,7 @@ if(!command.text.split(' ')[1]){
 
   //This is the junk I've written
   for(i = 0; i < rollCount; i++){
-  var rollTmp = roll(1, rollMin, rollMax) 
+  var rollTmp = roll(rollMax) 
   rollSum += rollTmp
     if (i < 1){
       rollString = rollString + " " + rollTmp 
@@ -75,15 +75,8 @@ if(!command.text.split(' ')[1]){
   relThis.res.end();
 }
 
-function roll(count, min, max){
-  var result = 0;
-  if(count === 1){
-    result = min + Math.floor(Math.random()*(max-min+1));
-  } else {
-    for(i = 0; i < count; i++){
-      result = result + (min + Math.floor(Math.random()*(max-min+1)));
-    }
-  }
+function roll(max){
+  var result = 1 + Math.floor(Math.random()*(max));
   return result;
 }
 
