@@ -56,44 +56,44 @@ function commandHandler(relThis, command){
       } else {
         rollString = rollString + ", " + rollTmp ;
       }
-	} 
+	}
+
+    if(!rollCount == 0 && !rollMax == 0) {
+
+      var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
+	
+      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+
+	  //Check for 1d20 Critical Rolls
+	  if (rollCount == 1 && rollMax == 20 && (rollSum == 1 || rollSum == 20) ){
+	    switch (true){
+  	      case (rollSum == 1):
+	        postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
+	        break;
+	      case (rollSum == 20):
+  	        postMessage(("Natural 20!"), command.name, command.user_id);
+	  	    break;
+          default:
+	    }
+	  } else {
+	    //Check roll ranges
+	    switch (true){
+	      case (rollTest < 20):
+		    postMessage(("That was an ugly roll..."), command.name, command.user_id);
+	  	    break;
+    	    case (rollTest < 80):
+		    //nothing in here right now.  This is just a normal roll
+		    break;
+	      case (rollTest <= 100):
+            postMessage(("Nice roll!"), command.name, command.user_id);
+            break;
+          default:
+	    }
+	  }
+      relThis.res.end();
+    } 
   }else {
     postMessage("That is not a valid die type", command.name, command.user_id);
-  }
-
-  if(!rollCount == 0 && !rollMax == 0) {
-
-    var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
-	
-    postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
-
-	//Check for 1d20 Critical Rolls
-	if (rollCount == 1 && rollMax == 20 && (rollSum == 1 || rollSum == 20) ){
-	  switch (true){
-	    case (rollSum == 1):
-	      postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
-	      break;
-	    case (rollSum == 20):
-	      postMessage(("Natural 20!"), command.name, command.user_id);
-	  	  break;
-        default:
-	  }
-	} else {
-	  //Check roll ranges
-	  switch (true){
-	    case (rollTest < 20):
-		  postMessage(("That was an ugly roll..."), command.name, command.user_id);
-		  break;
-  	    case (rollTest < 80):
-		  //nothing in here right now.  This is just a normal roll
-		  break;
-	    case (rollTest <= 100):
-          postMessage(("Nice roll!"), command.name, command.user_id);
-          break;
-        default:
-	  }
-	}
-    relThis.res.end();
   }
 }
 
