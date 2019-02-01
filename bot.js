@@ -46,14 +46,19 @@ function commandHandler(relThis, command){
   console.log('Count: ' + rollCount + ", Max: " + rollMax);
   relThis.res.writeHead(200);
 
-  for(i = 0; i < rollCount; i++){
-    var rollTmp = roll(rollMax) 
-    rollSum += rollTmp;
-    if (i < 1){
-      rollString = rollString + " " + rollTmp ;
-    } else {
-      rollString = rollString + ", " + rollTmp ;
-    }
+  if (rollMax.test(4|6|8|10|12|20)){
+    for(i = 0; i < rollCount; i++){
+    var rollTmp;
+    rollTmp = roll(rollMax);
+      rollSum += rollTmp;
+      if (i < 1){
+        rollString = rollString + " " + rollTmp ;
+      } else {
+        rollString = rollString + ", " + rollTmp ;
+      }
+	} 
+  }else {
+    postMessage("That is not a valid die type", command.name, command.user_id);
   }
 
   if(!rollCount == 0 && !rollMax == 0) {
