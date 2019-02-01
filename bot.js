@@ -77,7 +77,7 @@ function commandHandler(relThis, command){
 	}
 
 	//Check for 1d20 Critical Rolls
-	if (rollCount == 1 && rollMax == 20){}
+	if (rollCount == 1 && rollMax == 20){
 	  switch (true){
 	    case (rollSum == 1):
 	    postMessage(("I hope that wasnt a DC save.  Critical Failure!"), command.name, command.user_id);
