@@ -73,7 +73,6 @@ function commandHandler(relThis, command){
 	  	    break;
           default:
 		}
-	    break;
       case (rollTest < 20):
         postMessage(("That was an ugly roll..."), command.name, command.user_id);
         break;
