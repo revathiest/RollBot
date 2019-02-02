@@ -103,7 +103,7 @@ function rollHandler(relThis, command){
 /*
 This function handles the sing comand
 */
-singHandler(relThis, command){
+function singHandler(relThis, command){
   postMessage("You dont want me to do that. Think cats. Digital cats... It's not a pretty picture.", request.name, request.user_id);
   relThis.res.writeHead(200);
   relThis.res.end();
