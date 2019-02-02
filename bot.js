@@ -7,9 +7,9 @@ botCommandSing =  /^\/sing/;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && botCommandRoll.test(request.text)){
-    commandHandler(this, request);
+    rollHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
-    postMessage("You dont want me to do that. Think cats. Digital cats... It's not a pretty picture.", request.name, request.user_id);
+    singHandler(this, request);
   } else {
     console.log("don't care");
     this.res.writeHead(200);
@@ -18,10 +18,9 @@ function respond() {
 }
 
 /* 
-I might want to change this at some point to be able to handle
-more types of commands. 
+This function handles dice rolls 
 */
-function commandHandler(relThis, command){
+function rollHandler(relThis, command){
   var rollCount = 0,
   rollMax = 0,
   rollSum = 0,
@@ -99,6 +98,13 @@ function commandHandler(relThis, command){
   }else {
     postMessage("That is not a valid die type", command.name, command.user_id);
   }
+}
+
+/*
+This function handles the sing comand
+*/
+singHandler(relThis, command){
+  postMessage("You dont want me to do that. Think cats. Digital cats... It's not a pretty picture.", request.name, request.user_id);
 }
 
 function roll(sides){
