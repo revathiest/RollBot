@@ -9,7 +9,7 @@ function respond() {
   if(request.text && botCommandRoll.test(request.text)){
     rollHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
-    singHandler(this, request);
+    singHandler();
   } else {
     console.log("don't care");
     this.res.writeHead(200);
@@ -103,7 +103,7 @@ function rollHandler(relThis, command){
 /*
 This function handles the sing comand
 */
-function singHandler(relThis, command){
+function singHandler(){
   postMessage("You dont want me to do that. Think cats. Digital cats... It's not a pretty picture.", request.name, request.user_id);
   relThis.res.writeHead(200);
   relThis.res.end();
