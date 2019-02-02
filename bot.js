@@ -40,7 +40,9 @@ function commandHandler(relThis, command){
     //dice setup 
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
     rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
-	rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+	if (command.text.split(' ')[1].split('+')[1]){
+      rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+    }
   } else {
     rollCount = 0;
     rollMax = 0;
