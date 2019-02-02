@@ -99,21 +99,8 @@ function rollHandler(relThis, command){
 	var rollExtra;
 		
 	rollTmp = roll(rollMax);
-
-	if (rollAdv || rollDis){
-	  rollExtra = roll(rollMax);
-	  switch(true){
-	    case rollAdv:
-		  rollSum = max(rollTmp, rollExtra);
-		  break;
-		case rollDis:
-		  rollSum = min(rollTmp, rollExtra);
-		  break;
-		default:
-		rollsum += rollTmp;
-	  }
+    rollsum += rollTmp;
     
-	}
 	
 	  if (i < 1){
         rollString = rollString + " " + rollTmp ;
