@@ -69,6 +69,7 @@ function rollHandler(relThis, command){
 
 	postMessage(rollCount + " " + rollMax + " " + rollAdv + " " + rollDis + ".", command.name, command.user_id);
 
+	//verify if adv and dis are being used correctly
     if((rollAdv || rollDis) && !(rollCount == 1 && rollMax == 20)){
 	  postMessage("Advantage and Disadvantage are only available for a 1d20 roll.", command.name, command.user_id);
 	  console.log("Invalid attempt to use Advantage or Disadvantage");
@@ -77,7 +78,7 @@ function rollHandler(relThis, command){
 	  return;
 	}
 
-
+	//grab the roll modifier if there is one
 	if (command.text.split(' ')[1].split('+')[1]){
       rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
     }
@@ -88,15 +89,33 @@ function rollHandler(relThis, command){
   }
   relThis.res.writeHead(200);
 
+
   if ([4,6,8,10,12,20].indexOf(rollMax) > -1){
   console.log("Rolling dice.")
   relThis.res.writeHead(200);
   relThis.res.end();
     for(i = 0; i < rollCount; i++){
     var rollTmp;
-    rollTmp = roll(rollMax);
-      rollSum += rollTmp;
-      if (i < 1){
+	var rollExtra;
+		
+	rollTmp = roll(rollMax);
+
+	if (rollAdv || rollDis){
+	  rollExtra = roll(rollMax);
+	  switch(true){
+	    case rollAdv:
+		  rollSum = max(rollTmp, rollExtra);
+		  break;
+		case rollDis:
+		  rollSum = min(rollTmp, rollExtra);
+		  break;
+		default:
+		rollsum += rollTmp;
+	  }
+    
+	}
+	
+	  if (i < 1){
         rollString = rollString + " " + rollTmp ;
       } else {
         rollString = rollString + ", " + rollTmp ;
