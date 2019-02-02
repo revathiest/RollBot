@@ -1,6 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID,
+//List of commands
 botCommandRoll =  /^\/roll/;
 botCommandSing =  /^\/sing/;
 
@@ -29,18 +30,26 @@ function rollHandler(relThis, command){
   console.log("Initiating dice roll");
   relThis.res.writeHead(200);
   relThis.res.end();
+
+  //No parameters after the command
   if(!command.text.split(' ')[1]){
     postMessage("You have to tell me what to roll.", command.name, command.user_id);
-	console.log("No dice specified.");
+	console.log("number and type of dice not provided.");
     relThis.res.writeHead(200);
     relThis.res.end();
 	return;
-  } else if(command.text.split(' ')[2]){
+  }
+  
+  //Additional parameters after the first
+  if(command.text.split(' ')[2]){ 
     postMessage("That doesnt make sense.", command.name, command.user_id);
 	console.log("Invalid input.")
     relThis.res.writeHead(200);
     relThis.res.end();
-  } else if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
+	return;
+  }
+  
+  if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
     //dice setup 
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
     rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
