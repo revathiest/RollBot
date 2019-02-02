@@ -99,7 +99,7 @@ function rollHandler(relThis, command){
 	var rollExtra;
 		
 	rollTmp = roll(rollMax);
-    rollsum += rollTmp;
+    rollSum += rollTmp;
     
 	
 	  if (i < 1){
