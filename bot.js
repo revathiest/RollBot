@@ -67,6 +67,8 @@ function rollHandler(relThis, command){
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
     rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
 
+	postMessage(rollCount + " " + rollMax + " " + rollAdv + " " + rolDis, command.name, command.user_id);
+
     if((rollAdv || rollDis) && (!rollCount == 1 || !rollMax == 20)){
 	  postMessage("Advantage and Disadvantage are only available for a 1d20 roll.");
 	  console.log("Invalid attempt to use Advantage or Disadvantage");
