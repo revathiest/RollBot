@@ -26,7 +26,10 @@ function rollHandler(relThis, command){
   rollMax = 0,
   rollSum = 0,
   rollMod = 0;
-  rollString = "";
+  rollString = "",
+  rollAdv = false,
+  rollDis = false;
+
   console.log("Initiating dice roll");
   relThis.res.writeHead(200);
   relThis.res.end();
@@ -42,13 +45,25 @@ function rollHandler(relThis, command){
   
   //Additional parameters after the first
   if(command.text.split(' ')[2]){ 
-    postMessage("That doesnt make sense.", command.name, command.user_id);
-	console.log("Invalid input.")
-    relThis.res.writeHead(200);
-    relThis.res.end();
-	return;
+	switch (command.text.split(' ')[2]){
+	  case 'adv':
+	    rollAdv = true;
+	    break;
+	  case 'dis':
+	    rollDis = true;
+	    break;
+	  default:
+        postMessage("That doesnt make sense.", command.name, command.user_id);
+        console.log("Invalid input.")
+        relThis.res.writeHead(200);
+        relThis.res.end();
+        return;
+	}
   }
   
+
+
+
   if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
     //dice setup 
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
