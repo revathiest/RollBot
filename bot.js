@@ -34,6 +34,7 @@ function rollHandler(relThis, command){
 	console.log("No dice specified.");
     relThis.res.writeHead(200);
     relThis.res.end();
+	return;
   } else if(command.text.split(' ')[2]){
     postMessage("That doesnt make sense.", command.name, command.user_id);
 	console.log("Invalid input.")
@@ -72,7 +73,9 @@ function rollHandler(relThis, command){
 
       var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
       postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSum + rollMod)), command.name, command.user_id);
-
+	  console.log("Dice roll completed.");
+	  relThis.res.writeHead(200);
+      relThis.res.end();
 	  //Check for 1d20 Critical Rolls
 	  if (rollCount == 1 && rollMax == 20 && (rollSum == 1 || rollSum == 20) ){
 	    switch (true){
