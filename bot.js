@@ -166,6 +166,11 @@ function roll(sides){
   return result;
 }
 
+
+/*
+Dont change anything below.  This came with the original code and handles all of the communication with
+the chat room.  This code is exactly as it was when I found the bot. - Ken
+*/
 function postMessage(message, name, id) {
   var botResponse, options, body, botReq;
   options = {
