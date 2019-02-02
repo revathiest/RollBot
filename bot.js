@@ -61,13 +61,21 @@ function rollHandler(relThis, command){
 	}
   }
   
-
-
-
+  
   if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
     //dice setup 
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
     rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+
+    if((rollAdv || rollDis) && (!rollCount == 1 || !rollMax == 20)){
+	  postMessage("Advantage and Disadvantage are only available for a 1d20 roll.");
+	  console.log("Invalid attempt to use Advantage or Disadvantage");
+      relThis.res.writeHead(200);
+      relThis.res.end();
+	  return;
+	}
+
+
 	if (command.text.split(' ')[1].split('+')[1]){
       rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
     }
