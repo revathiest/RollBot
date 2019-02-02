@@ -25,6 +25,7 @@ function commandHandler(relThis, command){
   var rollCount = 0,
   rollMax = 0,
   rollSum = 0,
+  rollMod = 0;
   rollString = "";
 
   if(!command.text.split(' ')[1]){
@@ -39,6 +40,7 @@ function commandHandler(relThis, command){
     //dice setup 
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
     rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
+	rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
   } else {
     rollCount = 0;
     rollMax = 0;
@@ -62,7 +64,7 @@ function commandHandler(relThis, command){
 
       var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 	
-      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + rollSum), command.name, command.user_id);
+      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSum + rollMod)), command.name, command.user_id);
 
 	  //Check for 1d20 Critical Rolls
 	  if (rollCount == 1 && rollMax == 20 && (rollSum == 1 || rollSum == 20) ){
