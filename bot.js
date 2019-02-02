@@ -9,7 +9,7 @@ function respond() {
   if(request.text && botCommandRoll.test(request.text)){
     commandHandler(this, request);
   } else if(request.text && botCommandSing.test(request.text)){
-    postMessage("Looks like it works.", request.name, request.user_id);
+    postMessage("You dont want me to do that. Think cats. Digital cats... It's not a pretty picture.", request.name, request.user_id);
   } else {
     console.log("don't care");
     this.res.writeHead(200);
