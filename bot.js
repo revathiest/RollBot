@@ -68,7 +68,7 @@ function rollHandler(relThis, command){
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
     rollMax = parseInt(command.text.split(' ')[1].split('d')[1]);
 
-	postMessage(rollCount + " " + rollMax + " " + rollAdv + " " + rollDis + ".", command.name, command.user_id);
+	//postMessage(rollCount + " " + rollMax + " " + rollAdv + " " + rollDis + ".", command.name, command.user_id);
 
 	//verify if adv and dis are being used correctly
     if((rollAdv || rollDis) && !(rollCount == 1 && rollMax == 20)){
@@ -142,11 +142,13 @@ function rollHandler(relThis, command){
 	  	case rollAdv:
 		if(rollSum < rollSumTwo){
 			rollSum = rollSumTwo;
+			postMessage("It looks like you get to keep the " + rollSum, command.name, command.user_id);
 		}
 		break;
 		case rollDis:
 		if(rollSum > rollSumTwo){
 		  	rollSum = rollSumTwo;
+			postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
 		}
 		break;
 		default:
