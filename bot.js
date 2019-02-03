@@ -135,7 +135,7 @@ function rollHandler(relThis, command){
             postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
           }
 		break;
-		  postMessage("nothing", command.name, command.user_id);
+		  postMessage("This message should not be seen.", command.name, command.user_id);
 		default:
 		}
 	  }
