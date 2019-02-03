@@ -25,8 +25,10 @@ function rollHandler(relThis, command){
   var rollCount = 0,
   rollMax = 0,
   rollSum = 0,
+  rollSumTwo = 0,
   rollMod = 0;
   rollString = "",
+  rollStringTwo = "",
   rollAdv = false,
   rollDis = false;
 
@@ -61,7 +63,6 @@ function rollHandler(relThis, command){
 	}
   }
   
-  
   if(command.text.split(' ')[1] && command.text.split(' ')[1].split('d')[1]) {
     //dice setup 
     rollCount = parseInt(command.text.split(' ')[1].split('d')[0]);
@@ -94,14 +95,16 @@ function rollHandler(relThis, command){
   console.log("Rolling dice.")
   relThis.res.writeHead(200);
   relThis.res.end();
+
+
+
+
     for(i = 0; i < rollCount; i++){
     var rollTmp;
-	var rollExtra;
 		
 	rollTmp = roll(rollMax);
     rollSum += rollTmp;
     
-	
 	  if (i < 1){
         rollString = rollString + " " + rollTmp ;
       } else {
@@ -109,13 +112,48 @@ function rollHandler(relThis, command){
       }
 	}
 
+	if(rollAdv || rollDis){
+
+	  rollTmp = roll(rollMax);
+      rollSumTwo += rollTmp;
+
+	  if (i < 1){
+        rollStringTwo = rollStringTwo + " " + rollTmp ;
+      } else {
+        rollStringTwo = rollStringTwo + ", " + rollTmp ;
+      }
+	}
+
     if(!rollCount == 0 && !rollMax == 0) {
 
-      var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
       postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSum + rollMod)), command.name, command.user_id);
+
+	  if (rollAdv || rollDis){
+
+	    postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
+
+	  }
+
 	  console.log("Dice roll completed.");
 	  relThis.res.writeHead(200);
       relThis.res.end();
+
+	  switch (true){
+	  	case rollAdv:
+		if(rollSum < rollSumTwo){
+			rollSum = rollSumTwo;
+		}
+		break;
+		case rollDis:
+		if(rollSum > rollSumTwo){
+		  	rollSum = rollSumTwo;
+		}
+		break;
+		default:
+	  }
+
+
+
 	  //Check for 1d20 Critical Rolls
 	  if (rollCount == 1 && rollMax == 20 && (rollSum == 1 || rollSum == 20) ){
 	    switch (true){
