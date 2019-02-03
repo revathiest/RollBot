@@ -152,7 +152,7 @@ function rollHandler(relThis, command){
 		default:
 	  }
 
-
+	  var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 
 	  //Check for 1d20 Critical Rolls
 	  if (rollCount == 1 && rollMax == 20 && (rollSum == 1 || rollSum == 20) ){
