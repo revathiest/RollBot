@@ -12,7 +12,7 @@ function respond() {
   } else if(request.text && botCommandSing.test(request.text)){
     singHandler(this, request);
   } else {
-    console.log("don't care");
+    //console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
   }
@@ -96,31 +96,21 @@ function rollHandler(relThis, command){
   relThis.res.writeHead(200);
   relThis.res.end();
 
-
-
-
     for(i = 0; i < rollCount; i++){
-    var rollTmp;
-		
+    var rollTmp, rollTmpTwo;
+
 	rollTmp = roll(rollMax);
     rollSum += rollTmp;
+
+	rollTmpTwo = roll(rollMax);
+    rollSumTwo += rollTmpTwo;
     
 	  if (i < 1){
         rollString = rollString + " " + rollTmp ;
+        rollStringTwo = rollStringTwo + " " + rollTmpTwo ;
       } else {
         rollString = rollString + ", " + rollTmp ;
-      }
-	}
-
-	if(rollAdv || rollDis){
-
-	  rollTmp = roll(rollMax);
-      rollSumTwo += rollTmp;
-
-	  if (i < 1){
-        rollStringTwo = rollStringTwo + " " + rollTmp ;
-      } else {
-        rollStringTwo = rollStringTwo + ", " + rollTmp ;
+        rollStringTwo = rollStringTwo + ", " + rollTmpTwo ;
       }
 	}
 
