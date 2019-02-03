@@ -122,27 +122,26 @@ function rollHandler(relThis, command){
 
 	    postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
 
+	    switch (true){
+        case rollAdv:
+          if(rollSum < rollSumTwo){
+            rollSum = rollSumTwo;
+            postMessage("It looks like you get to keep the " + rollSum, command.name, command.user_id);
+          }
+		  break;
+		case rollDis:
+          if(rollSum > rollSumTwo){
+            rollSum = rollSumTwo;
+            postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
+          }
+		break;
+		default:
+		}
 	  }
 
 	  console.log("Dice roll completed.");
 	  relThis.res.writeHead(200);
       relThis.res.end();
-
-	  switch (true){
-	  	case rollAdv:
-		if(rollSum < rollSumTwo){
-			rollSum = rollSumTwo;
-			postMessage("It looks like you get to keep the " + rollSum, command.name, command.user_id);
-		}
-		break;
-		case rollDis:
-		if(rollSum > rollSumTwo){
-		  	rollSum = rollSumTwo;
-			postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
-		}
-		break;
-		default:
-	  }
 
 	  var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 
