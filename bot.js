@@ -91,7 +91,7 @@ function rollHandler(relThis, command){
   relThis.res.writeHead(200);
 
 
-  if ([4,6,8,10,12,20].indexOf(rollMax) > -1){
+  if ([4,6,8,10,12,20,100].indexOf(rollMax) > -1){
   console.log("Rolling dice.")
   relThis.res.writeHead(200);
   relThis.res.end();
