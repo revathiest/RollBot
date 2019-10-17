@@ -85,7 +85,7 @@ function rollHandler(relThis, command){
       if (command.text.split(' ')[1].split('+')[1]) {
           rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
       } else if (command.text.split(' ')[1].split('-')[1]) {
-          rollmod = parseInt(COMMAND.TEXT.SPLIT(' ')[1].SPLIT('-')[1]);
+          rollmod = parseInt(command.text.split(' ')[1].split('-')[1]);
           rollmod = rollmod * -1;
       }
 
@@ -122,7 +122,7 @@ function rollHandler(relThis, command){
 
     if(!rollCount == 0 && !rollMax == 0) {
 
-      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSum + rollMod)), command.name, command.user_id);
+      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] " + rollMod + " Total = " + (rollSum + rollMod)), command.name, command.user_id);
 
 	  if (rollAdv || rollDis){
 
