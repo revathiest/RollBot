@@ -85,7 +85,8 @@ function rollHandler(relThis, command){
       if (command.text.split(' ')[1].split('+')[1]) {
           rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
       } else if (command.text.split(' ')[1].split('-')[1]) {
-          rollmod = parseInt(COMMAND.TEXT.SPLIT(' ')[1].SPLIT('-')[1]) * -1;
+          rollmod = parseInt(COMMAND.TEXT.SPLIT(' ')[1].SPLIT('-')[1]);
+          rollmod = -rollmod;
       }
 
   console.log('Count: ' + rollCount + ", Max: " + rollMax + ", Modifier: " + rollMod);
