@@ -31,6 +31,8 @@ function rollHandler(relThis, command){
   rollStringTwo = "",
   rollAdv = false,
   rollDis = false;
+  rollModSub = false;
+
 
   console.log("Initiating dice roll");
   relThis.res.writeHead(200);
@@ -80,9 +82,12 @@ function rollHandler(relThis, command){
 	}
 
 	//grab the roll modifier if there is one
-	if (command.text.split(' ')[1].split('+')[1]){
-      rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
-    }
+      if (command.text.split(' ')[1].split('+')[1]) {
+          rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+      } else if (command.text.split(' ')[1].split('-')[1]) {
+          rollmod = parseInt(COMMAND.TEXT.SPLIT(' ')[1].SPLIT('-')[1]) * -1;
+      }
+
   console.log('Count: ' + rollCount + ", Max: " + rollMax + ", Modifier: " + rollMod);
   } else {
     rollCount = 0;
