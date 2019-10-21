@@ -31,7 +31,7 @@ function rollHandler(relThis, command){
   rollStringTwo = "",
   rollAdv = false,
   rollDis = false,
-  modSign="",
+  modSign="+",
   rollModSub = false;
 
 
