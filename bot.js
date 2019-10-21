@@ -30,7 +30,8 @@ function rollHandler(relThis, command){
   rollString = "",
   rollStringTwo = "",
   rollAdv = false,
-  rollDis = false;
+  rollDis = false,
+  modSign="",
   rollModSub = false;
 
 
@@ -84,9 +85,11 @@ function rollHandler(relThis, command){
 	//grab the roll modifier if there is one
       if (command.text.split(' ')[1].split('+')[1]) {
           rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+          modSign = "+ "
       } else if (command.text.split(' ')[1].split('-')[1]) {
           rollMod = parseInt(command.text.split(' ')[1].split('-')[1]);
           rollMod = rollMod * -1;
+          modSign = "- ";
       }
 
   console.log('Count: ' + rollCount + ", Max: " + rollMax + ", Modifier: " + rollMod);
@@ -122,11 +125,11 @@ function rollHandler(relThis, command){
 
     if(!rollCount == 0 && !rollMax == 0) {
 
-      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] " + rollMod + " Total = " + (rollSum + rollMod)), command.name, command.user_id);
+      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] "+ modSign + abs(rollMod) + " Total = " + (rollSum + rollMod)), command.name, command.user_id);
 
 	  if (rollAdv || rollDis){
 
-          postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] " + rollMod + " Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
+          postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] "+ modSign + abs(rollMod) + " Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
 
 	  }
 
