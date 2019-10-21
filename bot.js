@@ -85,7 +85,7 @@ function rollHandler(relThis, command){
 	//grab the roll modifier if there is one
       if (command.text.split(' ')[1].split('+')[1]) {
           rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
-          modSign = "+ "
+          modSign = "+ ";
       } else if (command.text.split(' ')[1].split('-')[1]) {
           rollMod = parseInt(command.text.split(' ')[1].split('-')[1]);
           rollMod = rollMod * -1;
