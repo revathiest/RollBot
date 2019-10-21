@@ -125,11 +125,11 @@ function rollHandler(relThis, command){
 
     if(!rollCount == 0 && !rollMax == 0) {
 
-      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] " + modSign + abs(rollMod) + " Total = " + (rollSum + rollMod)), command.name, command.user_id);
+      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] " + modSign + math.abs(rollMod) + " Total = " + (rollSum + rollMod)), command.name, command.user_id);
 
 	  if (rollAdv || rollDis){
 
-          postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] " + modSign + abs(rollMod) + " Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
+          postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] " + modSign + math.abs(rollMod) + " Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
 
 	  }
 
