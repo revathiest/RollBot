@@ -141,13 +141,13 @@ function rollHandler(relThis, command){
 	  	case rollAdv:
 		if(rollSum < rollSumTwo){
 			rollSum = rollSumTwo;
-			postMessage("It looks like you get to keep the " + rollSum + rollMod, command.name, command.user_id);
+			postMessage("It looks like you get to keep the " + (rollSum + rollMod), command.name, command.user_id);
 		}
 		break;
 		case rollDis:
 		if(rollSum > rollSumTwo){
 		  	rollSum = rollSumTwo;
-			postMessage("It looks like you have to keep the " + rollSum + rollMod, command.name, command.user_id);
+			postMessage("It looks like you have to keep the " + (rollSum + rollMod), command.name, command.user_id);
 		}
 		break;
 		default:
