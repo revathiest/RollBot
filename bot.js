@@ -147,7 +147,8 @@ function rollHandler(relThis, command){
 		break;
 		case rollDis:
 		if(rollSum > rollSumTwo){
-		  	rollSum = rollSumTwo;
+            rollSum = rollSumTwo;
+            rollSum = rollSum + rollMod;
 			postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
 		}
 		break;
