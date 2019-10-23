@@ -30,7 +30,10 @@ function rollHandler(relThis, command){
   rollString = "",
   rollStringTwo = "",
   rollAdv = false,
-  rollDis = false;
+  rollDis = false,
+  modSign="+",
+  rollModSub = false;
+
 
   console.log("Initiating dice roll");
   relThis.res.writeHead(200);
@@ -80,9 +83,15 @@ function rollHandler(relThis, command){
 	}
 
 	//grab the roll modifier if there is one
-	if (command.text.split(' ')[1].split('+')[1]){
-      rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
-    }
+      if (command.text.split(' ')[1].split('+')[1]) {
+          rollMod = parseInt(command.text.split(' ')[1].split('+')[1]);
+          modSign = "+";
+      } else if (command.text.split(' ')[1].split('-')[1]) {
+          rollMod = parseInt(command.text.split(' ')[1].split('-')[1]);
+          rollMod = rollMod * -1;
+          modSign = "-";
+      }
+
   console.log('Count: ' + rollCount + ", Max: " + rollMax + ", Modifier: " + rollMod);
   } else {
     rollCount = 0;
@@ -91,7 +100,7 @@ function rollHandler(relThis, command){
   relThis.res.writeHead(200);
 
 
-  if ([4,6,8,10,12,20].indexOf(rollMax) > -1){
+  if ([4,6,8,10,12,20,100].indexOf(rollMax) > -1){
   console.log("Rolling dice.")
   relThis.res.writeHead(200);
   relThis.res.end();
@@ -116,33 +125,35 @@ function rollHandler(relThis, command){
 
     if(!rollCount == 0 && !rollMax == 0) {
 
-      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSum + rollMod)), command.name, command.user_id);
+      postMessage(("rolled: " + rollString + " [" + rollCount + "d" + rollMax + "] " + modSign + Math.abs(rollMod) + " Total = " + (rollSum + rollMod)), command.name, command.user_id);
 
 	  if (rollAdv || rollDis){
 
-	    postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
+          postMessage(("rolled: " + rollStringTwo + " [" + rollCount + "d" + rollMax + "] " + modSign + Math.abs(rollMod) + " Total = " + (rollSumTwo + rollMod)), command.name, command.user_id);
 
-	    switch (true){
-        case rollAdv:
-          if(rollSum < rollSumTwo){
-            rollSum = rollSumTwo;
-            postMessage("It looks like you get to keep the " + rollSum, command.name, command.user_id);
-          }
-		  break;
-		case rollDis:
-          if(rollSum > rollSumTwo){
-            rollSum = rollSumTwo;
-            postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
-          }
-		break;
-		  postMessage("This message should not be seen.", command.name, command.user_id);
-		default:
-		}
 	  }
 
 	  console.log("Dice roll completed.");
 	  relThis.res.writeHead(200);
       relThis.res.end();
+
+	  switch (true){
+	  	case rollAdv:
+		if(rollSum < rollSumTwo){
+            rollSum = rollSumTwo;
+            rollSum = rollSum + rollMod;
+			postMessage("It looks like you get to keep the " + rollSum, command.name, command.user_id);
+		}
+		break;
+		case rollDis:
+		if(rollSum > rollSumTwo){
+            rollSum = rollSumTwo;
+            rollSum = rollSum + rollMod;
+			postMessage("It looks like you have to keep the " + rollSum, command.name, command.user_id);
+		}
+		break;
+		default:
+	  }
 
 	  var rollTest = Math.ceil(rollSum / (rollCount * rollMax) * 100);
 
